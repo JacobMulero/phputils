@@ -29,20 +29,6 @@
   "autoload": {
     "psr-0":{
       "Phputils":"lib/"
-    },
-    "classmap": [
-      "lib/Xentoolbox",
-      "lib/Xentoolbox/BaseApp",
-      "lib/Xentoolbox/BaseApp/Collections",
-      "lib/Xentoolbox/Dedupe",
-      "lib/Xentoolbox/Exceptions",
-      "lib/Xentoolbox/Importer",
-      "lib/Xentoolbox/SnapshotRecover",
-      "lib/Xentoolbox/Shell",
-      "lib/Xentoolbox/Utils",
-      "lib/Xentoolbox/XenApi",
-      "lib/Xentoolbox/XenApi/Collections",
-      "lib/Xentoolbox/XenApi/Extensions"
-    ]
+    }
   }
 }
