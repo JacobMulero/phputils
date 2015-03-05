@@ -13,22 +13,11 @@
     }
   ],
   "require": {
-    "php": ">=5.3.0",
-    "swiftmailer/swiftmailer": "*"
-
-  },
-  "require-dev": {
-    "phpunit/phpunit": "3.7.*"
-  },
-  "suggest": {
-    "ext-curl": "*"
-  },
-  "config": {
-    "bin-dir": "bin"
+    "php": ">=5.3.0"
   },
   "autoload": {
     "psr-0":{
-      "Phputils":"lib/"
+      "Phputils":"lib"
     }
   }
 }
