@@ -1,0 +1,48 @@
+{
+  "name": "lunia/phputils",
+  "description": "Librerias Genéricas Php",
+  "keywords": ["datetime", "utils"],
+  "homepage": "http://lunia.es",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jaime Mulero Molinet",
+      "email": "jmmolinet@gmail.com",
+      "homepage": "http://insdout.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "swiftmailer/swiftmailer": "*"
+
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "suggest": {
+    "ext-curl": "*"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-0":{
+      "Phputils":"lib/"
+    },
+    "classmap": [
+      "lib/Xentoolbox",
+      "lib/Xentoolbox/BaseApp",
+      "lib/Xentoolbox/BaseApp/Collections",
+      "lib/Xentoolbox/Dedupe",
+      "lib/Xentoolbox/Exceptions",
+      "lib/Xentoolbox/Importer",
+      "lib/Xentoolbox/SnapshotRecover",
+      "lib/Xentoolbox/Shell",
+      "lib/Xentoolbox/Utils",
+      "lib/Xentoolbox/XenApi",
+      "lib/Xentoolbox/XenApi/Collections",
+      "lib/Xentoolbox/XenApi/Extensions"
+    ]
+  }
+}
