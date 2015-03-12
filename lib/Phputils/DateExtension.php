@@ -7,6 +7,7 @@
 
 namespace Phputils;
 
+use Buzz\Exception\InvalidArgumentException;
 use DateTime;
 use DateInterval;
 use DateTimeZone;
@@ -19,11 +20,40 @@ class DateExtension extends DateTime{
 
     const MAX_MYSQL_DATE = '9999-12-31';
 
-    public function __construct($time = null, $tz = null)
+    function __construct($time = null, $tz = null)
     {
-        parent::__construct($time, $tz);
+
+        parent::__construct($time, $tz?:new DateTimeZone(date_default_timezone_get()));
     }
 
+    /**
+     * Creates a DateTimeZone from a string or a DateTimeZone
+     *
+     * @param DateTimeZone|string|null $object
+     *
+     * @return DateTimeZone
+     *
+     * @throws InvalidArgumentException
+     */
+    protected static function safeCreateDateTimeZone($object)
+    {
+        if ($object === null) {
+            // Don't return null... avoid Bug #52063 in PHP <5.3.6
+            return new DateTimeZone(date_default_timezone_get());
+        }
+
+        if ($object instanceof DateTimeZone) {
+            return $object;
+        }
+
+        $tz = @timezone_open((string) $object);
+
+        if ($tz === false) {
+            throw new InvalidArgumentException('Unknown or bad timezone ('.$object.')');
+        }
+
+        return $tz;
+    }
 
     /**
      * Return Date in ISO8601 format
