@@ -9,8 +9,21 @@ namespace Phputils;
 
 use DateTime;
 use DateInterval;
+use DateTimeZone;
 
+/**
+ * Class DateExtension
+ * @package Phputils
+ */
 class DateExtension extends DateTime{
+
+    const MAX_MYSQL_DATE = '9999-12-31';
+
+    public function __construct($time = null, $tz = null)
+    {
+        parent::__construct($time, $tz);
+    }
+
 
     /**
      * Return Date in ISO8601 format
@@ -18,7 +31,7 @@ class DateExtension extends DateTime{
      * @return String
      */
     public function __toString() {
-        return $this->format('Y-m-d');
+        return $this->format('l jS \of F Y h:i:s A');
     }
 
     /**
@@ -45,5 +58,50 @@ class DateExtension extends DateTime{
         return $this->diff($now)->format('%y');
     }
 
+    /**
+     * @return string
+     * returns ISO 8601 complete date
+     */
+    public function toISOCompleteDate()
+    {
+        return $this->format('Y-m-d');
+    }
+
+    /**
+     * @return string
+     * returns ISO 8601 complete date with time
+     */
+    public function toISOCompleteDateTime()
+    {
+        return $this->format('Y-m-d H:i');
+    }
+
+    public static function createFromFormat($format, $time, DateTimeZone $tz = null)
+    {
+        if ($tz !== null) {
+            $dt = parent::createFromFormat($format, $time, $tz);
+        } else {
+            $dt = parent::createFromFormat($format, $time);
+        }
+
+        if ($dt instanceof DateTime) {
+            return static::instance($dt);
+        }
+
+        $errors = static::getLastErrors();
+        throw new \InvalidArgumentException(implode(PHP_EOL, $errors['errors']));
+    }
+
+    /**
+     * Create a DateTimeExtension instance from a DateTime one
+     *
+     * @param DateTime $dt
+     *
+     * @return static
+     */
+    public static function instance(DateTime $dt)
+    {
+        return new static($dt->format('Y-m-d H:i:s.u'), $dt->getTimeZone());
+    }
 
 }
